@@ -5,44 +5,84 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:padding="16dp">
+    android:padding="@dimen/common_spacing">
 
 
     <ImageView
         android:id="@+id/avatar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/top_barrier"
+        android:layout_marginBottom="@dimen/common_spacing"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:paddingRight="16dp"
-        tools:src="@sample/posts.json/data/authorAvatar"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@sample/posts.json/data/authorAvatar" />
 
     <TextView
         android:id="@+id/author"
-        android:layout_width="wrap_content"
+        android:layout_marginStart="@dimen/common_spacing"
+        android:layout_marginEnd="@dimen/common_spacing"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/avatar"
+        app:layout_constraintStart_toEndOf="@id/avatar"
         app:layout_constraintTop_toTopOf="@id/avatar"
         app:layout_constraintBottom_toTopOf="@id/published"
+        app:layout_constraintEnd_toStartOf="@id/menu"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:maxLines="1"
+        android:ellipsize="marquee"
         tools:text="@sample/posts.json/data/author" />
     <TextView
         android:id="@+id/published"
+        android:layout_marginStart="@dimen/common_spacing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toRightOf="@id/avatar"
         app:layout_constraintBottom_toBottomOf="@id/avatar"
         app:layout_constraintTop_toBottomOf="@id/author"
+        app:layout_constraintBottom_toTopOf="@id/top_barrier"
+        android:layout_marginBottom="@dimen/common_spacing"
         tools:text="@sample/posts.json/data/published" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/menu"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/top_barrier"
+        android:layout_marginBottom="@dimen/common_spacing"
+        tools:srcCompat="@drawable/ic_baseline_more_vert_24" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/top_barrier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:paddingLeft="16dp"
-        tools:src="@drawable/ic_baseline_more_vert_24"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="avatar,menu,published"
+        />
 
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_spacing"
+        android:autoLink="all"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_barrier"
+        app:layout_constraintBottom_toTopOf="@id/bottom_barrier"
+        android:layout_marginBottom="@dimen/common_spacing"
+        tools:text="@sample/posts.json/data/content"/>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/bottom_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="content"
+        />
 
 
 
