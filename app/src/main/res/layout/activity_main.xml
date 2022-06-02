@@ -16,7 +16,7 @@
         android:layout_marginBottom="@dimen/common_spacing"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@sample/posts.json/data/authorAvatar" />
+        app:srcCompat="@drawable/ic_netology" />
 
     <TextView
         android:id="@+id/author"
@@ -53,7 +53,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/topBarrier"
         android:layout_marginBottom="@dimen/common_spacing"
-        tools:srcCompat="@drawable/ic_baseline_more_vert_24" />
+        app:srcCompat="@drawable/ic_baseline_more_vert_24" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/topBarrier"
@@ -92,7 +92,7 @@
         android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/bottomBarrier"
-        tools:srcCompat="@drawable/ic_like_24" />
+        app:srcCompat="@drawable/ic_like_24" />
 
     <TextView
         android:id="@+id/likesCount"
@@ -113,7 +113,7 @@
         app:layout_constraintTop_toTopOf="@id/bottomBarrier"
         android:layout_marginStart="@dimen/common_spacing"
         android:layout_marginTop="@dimen/common_spacing"
-        tools:srcCompat="@drawable/ic_baseline_share_24" />
+        app:srcCompat="@drawable/ic_baseline_share_24" />
 
     <TextView
         android:id="@+id/shareCount"
@@ -134,7 +134,7 @@
         app:layout_constraintTop_toTopOf="@id/bottomBarrier"
         android:layout_marginEnd="12dp"
         android:layout_marginTop="@dimen/common_spacing"
-        tools:srcCompat="@drawable/ic_views_24" />
+        app:srcCompat="@drawable/ic_views_24" />
 
     <TextView
         android:id="@+id/viewCount"
