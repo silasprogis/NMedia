@@ -2,6 +2,7 @@ package ru.netology.nmedia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import ru.netology.nmedia.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -11,55 +12,58 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val post = Post(
+/*        val post = Post(
             1,
             "Нетология. Университет интернет-профессий будущего",
             "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
             "26 мая в 18:00",
-        9999
-        )
-        var shareCountValue: Int = 995
-        val viewCountValue: Int = 999
+        9999,
+        995,
+        999
+        )*/
+        val viewModel: PostViewModel by viewModels()
+        viewModel.data.observe(this) { post ->
+            with(binding) {
+                author.text = post.author
+                published.text = post.published
+                content.text = post.content
+                likesCount.text = countConvert(post.likesCount)
+                shareCount.text = countConvert(post.shareCountValue)
+                viewCount.text = countConvert(post.viewCountValue)
 
-        with(binding) {
-            author.text = post.author
-            published.text = post.published
-            content.text = post.content
-            likesCount.text = countConvert(post.likesCount)
-            shareCount.text = countConvert(shareCountValue)
-            viewCount.text = countConvert(viewCountValue)
+                if (post.likedByMe) {
+                    like?.setImageResource(R.drawable.ic_liked_24)
+                }
 
-            if (post.likedByMe) {
-                like?.setImageResource(R.drawable.ic_liked_24)
-            }
-
-            like?.setOnClickListener {
+                /*        like?.setOnClickListener {
                 post.likedByMe = !post.likedByMe
                 like.setImageResource(
                     if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24
                 )
                 if (post.likedByMe) {
                     post.likesCount += 1
-                    //likesCount.text = post.likesCount.toString()
                     likesCount.text = countConvert(post.likesCount)
                 } else {
                     post.likesCount -= 1
-                    //likesCount.text = post.likesCount.toString()
                     likesCount.text = countConvert(post.likesCount)
                 }
             }
             share.setOnClickListener {
-                shareCountValue += 1
-                shareCount.text = countConvert(shareCountValue)
+                post.shareCountValue += 1
+                shareCount.text = countConvert(post.shareCountValue)
             }
-
+*/
+            }
+        }
+        binding.like.setOnClickListener {
+            viewModel.onLikeClicked()
         }
     }
-    fun countConvert (count: Int): String {
+    fun countConvert(count: Int): String {
         val count = count
         var converted: String
         converted = count.toString()
-        when(count) {
+        when (count) {
             in 0..999 -> converted = count.toString()
             in 1000..9999 -> if ((count % 1000) < 100) {
                 converted = ((count / 1000).toString() + "K")
