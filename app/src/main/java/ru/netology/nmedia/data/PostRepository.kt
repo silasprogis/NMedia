@@ -8,4 +8,5 @@ interface PostRepository {
     //val data: LiveData<Post>
     fun get(): LiveData<Post>
     fun like()
+    fun share()
 }
