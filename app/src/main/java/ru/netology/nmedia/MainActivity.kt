@@ -15,8 +15,9 @@ class MainActivity : AppCompatActivity() {
 
         val viewModel: PostViewModel by viewModels()
         viewModel.data.observe(this) { posts ->
+            binding.container.removeAllViews()
             posts.map { post ->
-                CardPostBinding.inflate(layoutInflater,binding.root, false).apply {
+                CardPostBinding.inflate(layoutInflater, binding.container, true).apply {
                     author.text = post.author
                     published.text = post.published
                     content.text = post.content
@@ -30,8 +31,6 @@ class MainActivity : AppCompatActivity() {
                         viewModel.likeById(post.id)
                     }
                 }.root
-            }.forEach {
-                binding.root.addView(it)
             }
         }
     }
