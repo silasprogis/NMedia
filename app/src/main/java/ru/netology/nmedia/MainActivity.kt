@@ -9,15 +9,22 @@ import ru.netology.nmedia.databinding.CardPostBinding
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_main)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
+        val adapter = PostAdapter {
+            viewModel.likeById(it.id)
+        }
+        binding.list.adapter = adapter
         viewModel.data.observe(this) { posts ->
-            binding.container.removeAllViews()
+            adapter.list = posts
+        }
+
+        /*viewModel.data.observe(this) { posts ->
+            binding.list.removeAllViews()
             posts.map { post ->
-                CardPostBinding.inflate(layoutInflater, binding.container, true).apply {
+                CardPostBinding.inflate(layoutInflater, binding.list, true).apply {
                     author.text = post.author
                     published.text = post.published
                     content.text = post.content
@@ -32,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }.root
             }
-        }
+        }*/
     }
     fun countConvert(count: Int): String {
         val count = count
