@@ -12,9 +12,9 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            /*likesCount.text = countConvert(post.likesCount)
+            likesCount.text = countConvert(post.likesCount)
             shareCount.text = countConvert(post.shareCountValue)
-            viewCount.text = countConvert(post.viewCountValue)*/
+            viewCount.text = countConvert(post.viewCountValue)
             like.setImageResource(
                 if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24
             )
@@ -22,5 +22,22 @@ class PostViewHolder(
                 onLikeListener(post)
             }
         }
+    }
+    fun countConvert(count: Int): String {
+        val count = count
+        var converted: String
+        converted = count.toString()
+        when (count) {
+            in 0..999 -> converted = count.toString()
+            in 1000..9999 -> if ((count % 1000) < 100) {
+                converted = ((count / 1000).toString() + "K")
+            } else {
+                converted =
+                    ((count / 1000).toString() + "," + ((count % 1000) / 100).toString() + "K")
+            }
+            in 10000..999999 -> converted = ((count / 1000).toString() + "K")
+            in 1000000..Int.MAX_VALUE -> converted = ((count / 1000000).toString() + "M")
+        }
+        return converted
     }
 }
