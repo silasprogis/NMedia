@@ -8,6 +8,7 @@ import ru.netology.nmedia.databinding.CardPostBinding
 
 typealias OnLikeListener = (post: Post) -> Unit
 
+
 class PostAdapter(
     private val onLikeListener: OnLikeListener
     ) : ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
