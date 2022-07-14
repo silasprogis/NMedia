@@ -15,7 +15,9 @@ class MainActivity : AppCompatActivity() {
         val viewModel: PostViewModel by viewModels()
         val adapter = PostAdapter {
             viewModel.likeById(it.id)
+            viewModel.shareById(it.id)
         }
+            
         binding.list.adapter = adapter
         viewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
@@ -41,6 +43,8 @@ class MainActivity : AppCompatActivity() {
             }
         }*/
     }
+
+
     fun countConvert(count: Int): String {
         val count = count
         var converted: String
