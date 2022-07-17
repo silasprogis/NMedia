@@ -52,8 +52,8 @@ class InMemoryPostRepositoryImpl : PostRepository {
         data.value = posts
     }
 
- /*   override fun share() {
-        post = post.copy(shareCountValue = post.shareCountValue + 1)
-        data.value = post
-    }*/
+    override fun removeById(id: Long) {
+        posts = posts.filterNot { it.id == id }
+        data.value = posts
+    }
 }

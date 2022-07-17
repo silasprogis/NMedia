@@ -13,38 +13,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
-        val adapter = PostAdapter ({
-            viewModel.likeById(it.id)
-        },{
-            viewModel.shareById(it.id)
-        })
+        val adapter = PostAdapter (
+            onLikeListener = { viewModel.likeById(it.id) },
+            onShareListener = { viewModel.shareById(it.id) },
+            onRemoveListener = { viewModel.removeById(it.id) }
+        )
             
         binding.list.adapter = adapter
         viewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
         }
-
-        /*viewModel.data.observe(this) { posts ->
-            binding.list.removeAllViews()
-            posts.map { post ->
-                CardPostBinding.inflate(layoutInflater, binding.list, true).apply {
-                    author.text = post.author
-                    published.text = post.published
-                    content.text = post.content
-                    likesCount.text = countConvert(post.likesCount)
-                    shareCount.text = countConvert(post.shareCountValue)
-                    viewCount.text = countConvert(post.viewCountValue)
-                    like.setImageResource(
-                        if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24
-                    )
-                    like?.setOnClickListener {
-                        viewModel.likeById(post.id)
-                    }
-                }.root
-            }
-        }*/
     }
-
 
     fun countConvert(count: Int): String {
         val count = count
