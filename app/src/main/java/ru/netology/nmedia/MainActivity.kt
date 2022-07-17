@@ -18,6 +18,13 @@ class MainActivity : AppCompatActivity() {
             onShareListener = { viewModel.shareById(it.id) },
             onRemoveListener = { viewModel.removeById(it.id) }
         )
+        binding.save.setOnClickListener {
+            with(binding.content) {
+                if (text.isNullOrBlank() {
+
+                    })
+            }
+        }
             
         binding.list.adapter = adapter
         viewModel.data.observe(this) { posts ->
