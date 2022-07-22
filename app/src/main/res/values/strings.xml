@@ -3,4 +3,5 @@
     <string name="nmedia">NMedia!</string>
     <string name="post_menu_remove">Remove</string>
     <string name="post_hint">post_text</string>
+    <string name="empty_text_error">Text is empty</string>
 </resources>

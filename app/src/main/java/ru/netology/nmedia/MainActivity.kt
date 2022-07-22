@@ -2,6 +2,8 @@ package ru.netology.nmedia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import android.widget.Toast.*
 import androidx.activity.viewModels
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.databinding.CardPostBinding
@@ -20,9 +22,13 @@ class MainActivity : AppCompatActivity() {
         )
         binding.save.setOnClickListener {
             with(binding.content) {
-                if (text.isNullOrBlank() {
-
-                    })
+                if (text.isNullOrBlank()) {
+                    Toast.makeText(
+                        context,context.getString(R.string.empty_text_error), LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+                viewModel.changeContent(text.toString().trim())
             }
         }
             
