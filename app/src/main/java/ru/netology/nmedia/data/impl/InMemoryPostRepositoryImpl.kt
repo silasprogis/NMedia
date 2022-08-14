@@ -10,7 +10,7 @@ class InMemoryPostRepositoryImpl : PostRepository {
 
     private var posts = listOf(
         Post(
-        1,
+        2,
         "Нетология. Университет интернет-профессий будущего",
         "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
         "26 мая в 18:00",
@@ -20,7 +20,7 @@ class InMemoryPostRepositoryImpl : PostRepository {
         false
         ),
         Post(
-            2,
+            1,
         "Нетология. Университет интернет-профессий будущего",
         "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
         "26 мая в 18:00",
@@ -52,8 +52,29 @@ class InMemoryPostRepositoryImpl : PostRepository {
         data.value = posts
     }
 
- /*   override fun share() {
-        post = post.copy(shareCountValue = post.shareCountValue + 1)
-        data.value = post
-    }*/
+    override fun removeById(id: Long) {
+        posts = posts.filterNot { it.id == id }
+        data.value = posts
+    }
+
+    override fun save(post: Post) {
+        if (post.id == 0L) {
+            posts = listOf(
+                post.copy(
+                    id = posts.first().id + 1
+                )
+            ) + posts
+            data.value = posts
+            return
+        }
+
+        posts = posts.map {
+            if (it.id == post.id) {
+                it.copy(content = post.content)
+            } else {
+                it
+            }
+        }
+        data.value = posts
+    }
 }
